@@ -19,6 +19,11 @@ app.use(bodyParser.json())
 // Initial Route
 app.use('/api', router)
 
+//Middleware Error
+app.use(function(err, req, res, next){
+    res.status(422).send({ message: err.message })
+})
+
 app.listen(process.env.port || 2019, function(){
     console.log('Server Berhasil Dibuat')
 });
