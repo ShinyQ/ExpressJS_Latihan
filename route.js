@@ -3,8 +3,16 @@ const router = express.Router()
 const mHero = require('./models/heroes')
 
 router.get('/heroes', function(req, res){
-    res.send('GET Heroes')
+   mHero.find({}).then(function(result){
+       res.send(result)
+   })
 })
+
+router.get('/heroes/:id', function(req, res){
+    mHero.find({ _id: req.params.id }).then(function(result){
+        res.send(result)
+    })
+ })
 
 router.post('/heroes', function(req, res){
     const {name, role} = req.body
