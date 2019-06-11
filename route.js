@@ -15,11 +15,17 @@ router.post('/heroes', function(req, res){
 })
 
 router.put('/heroes/:id', function(req, res){
-    res.send('PUT Heroes')
+    mHero.findOneAndUpdate({ _id: req.params.id }, req.body).then(function(hero){
+        res.findOne({ _id: req.params.id }).then(function(hero){
+            res.send(hero)
+        })
+    })
 })
 
 router.delete('/heroes/:id', function(req, res){
-    res.send('Delete Heroes')
+    mHero.findOneAndRemove({ _id: req.params.id }).then(function(result){
+        res.send(result)
+    })
 })
 
 module.exports = router
